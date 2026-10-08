@@ -1,0 +1,11 @@
+services:
+  scrambler:
+    image: nginx:alpine
+    container_name: scramble-stepper
+    restart: unless-stopped
+    ports:
+      - "8088:80"
+    volumes:
+      # Only the site files are mounted, so .git and anything else in the repo stays private.
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./vendor:/usr/share/nginx/html/vendor:ro
