@@ -291,7 +291,7 @@ kbd{font-family:var(--mono);font-size:12px;padding:1px 5px;border-radius:4px;bor
           <label class="field-head" for="speed"><span>Turn speed</span><output id="speedOut">0.40 s</output></label>
           <input type="range" id="speed" min="0" max="1200" step="50" value="400">
         </div>
-        <label class="check"><input type="checkbox" id="dim" checked> Dim the layers that stay still</label>
+        <label class="check"><input type="checkbox" id="dim"> Dim the layers that stay still (main view only)</label>
         <label class="check"><input type="checkbox" id="autoCam"> Swing the main view to each turning face</label>
       </div>
       <div class="block" data-mode="step">
@@ -901,8 +901,8 @@ if(reduceMotion) $('speed').value = 0;
 // Still layers fade to a near-grey of their own colour (and lose most of their gloss),
 // so a dimmed orange can never be mistaken for red, or a dimmed yellow for white.
 const _hsl = {};
-function highlight(m){
-  const dimOn = $('dim').checked, coat = tileParams(look.finish).clearcoat;
+function highlight(m, allowDim = true){
+  const dimOn = allowDim && $('dim').checked, coat = tileParams(look.finish).clearcoat;
   stepCube.cubies.forEach(c => {
     const lit = !m || !dimOn || stepCube.inLayer(c, m.axis, m.layer);
     c.userData.tiles.forEach(t => {
@@ -990,7 +990,7 @@ function buildThumbs(){
     stepCube.setState(seq, i);
     const m = seq[i] || null;
     buildArrow(m, DEFAULT_DIR);   // one fixed viewpoint for every card
-    highlight(m);
+    highlight(m, false);          // cards always show true colours so they can be matched against a real cube
     thumbRenderer.render(sc, thumbCam);
     thumbUrls.push(thumbRenderer.domElement.toDataURL('image/png'));
   }
@@ -1215,7 +1215,7 @@ $('len').addEventListener('change', () => loadSequence(generate(+$('len').value)
 function speedText(){ speed = +$('speed').value; $('speedOut').textContent = speed === 0 ? 'Instant' : `${(speed/1000).toFixed(2)} s`; }
 $('speed').addEventListener('input', speedText);
 speedText();
-$('dim').addEventListener('change', () => { highlight(seq[idx]); buildThumbs(); });
+$('dim').addEventListener('change', () => highlight(seq[idx]));
 $('autoCam').addEventListener('change', decorate);
 $('bToPlay').onclick = () => { setMode('play'); shuffleWith(seq.slice()); };
 
