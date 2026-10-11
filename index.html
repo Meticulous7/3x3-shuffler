@@ -4,8 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Scrambler">
-<title>Scramble Stepper</title>
+<meta name="apple-mobile-web-app-title" content="3x3 Shuffler">
+<title>3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube &amp; Timer</title>
+<meta name="description" content="Generate a Rubik's cube scramble and follow it move by move on a 3D cube, solve a virtual 3x3 in your browser, or time your real solves with Ao5 and Ao12. Free, no sign-up.">
+<link rel="canonical" href="https://3x3shuffler.app/">
+<meta name="theme-color" content="#14171B">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="3x3 Shuffler">
+<meta property="og:title" content="3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube &amp; Timer">
+<meta property="og:description" content="Follow any scramble move by move on a 3D cube, solve a virtual 3x3, or time your real solves. Free, in your browser.">
+<meta property="og:url" content="https://3x3shuffler.app/">
+<meta property="og:image" content="https://3x3shuffler.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A 3D Rubik's cube mid-turn with a scramble shown move by move">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"3x3 Shuffler","url":"https://3x3shuffler.app/","description":"Rubik's cube scramble generator with a move-by-move 3D guide, a playable virtual 3x3 cube and a speedcubing timer.","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires a browser with WebGL","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
@@ -21,7 +41,7 @@
           <polygon id="logoF" points="3,9 16,16 16,30 3,23" fill="#FF6A00" stroke="#16181b" stroke-width="1.5" stroke-linejoin="round"/>
           <polygon id="logoR" points="29,9 16,16 16,30 29,23" fill="#0046AD" stroke="#16181b" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
-        <h1>Scramble Stepper</h1>
+        <h1>3x3 Shuffler</h1>
       </div>
       <p class="hold" id="hold">Hold your cube with <b>yellow</b> on top, <b>orange</b> facing you and <b>blue</b> on the right.</p>
     </div>
@@ -258,6 +278,43 @@
       <span>Each card shows the cube before that move, read left to right. Click one to jump there.</span>
     </div>
     <div class="film" id="film"></div>
+  </section>
+
+  <section class="about" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">About 3x3 Shuffler</h2>
+    <p class="lede">A free tool for the 3x3 Rubik's cube. Generate a random scramble and follow it one turn at a time on a 3D cube, practice solving a virtual cube in your browser, or time your real solves.</p>
+    <div class="about-grid">
+      <section>
+        <h3>Step through a scramble</h3>
+        <p>Each move gets an arrow on the 3D cube and a card showing the cube before that turn, so you can check your own cube after every move. Paste any scramble in standard notation, like R U' F2, to review it.</p>
+      </section>
+      <section>
+        <h3>Play</h3>
+        <p>Shuffle the virtual cube and solve it by dragging rows and columns, or with the U D L R F B keys. A timer and move counter track every solve, and you can switch between a glossy UV-coated or matte finish.</p>
+      </section>
+      <section>
+        <h3>Timer</h3>
+        <p>A speedcubing timer for your real cube. Hold Space (or press and hold on a phone), let go to start, and tap to stop. Your best time, Ao5 and Ao12 are worked out as you go.</p>
+      </section>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>What do the letters in a scramble mean?</summary>
+        <p>Each letter is a face of the cube: U (up), D (down), R (right), L (left), F (front) and B (back). A letter on its own means turn that face a quarter turn clockwise, as if you were looking straight at it. An apostrophe, as in R', means counter-clockwise, and a 2, as in R2, means a half turn.</p>
+      </details>
+      <details>
+        <summary>What are Ao5 and Ao12?</summary>
+        <p>They are the averages speedcubers use. Take your last 5 (or 12) times, drop the best and the worst, and average the rest. They show your typical speed better than a single best time.</p>
+      </details>
+      <details>
+        <summary>Which way should I hold the cube?</summary>
+        <p>By default, hold it with yellow on top, orange facing you and blue on the right. If you prefer the competition orientation, switch to white on top and green in front in the Cube panel, and the 3D cube changes to match.</p>
+      </details>
+      <details>
+        <summary>Do I need an account?</summary>
+        <p>No. Everything runs in your browser. Your times, solves and recent scrambles are saved only on your own device.</p>
+      </details>
+    </div>
   </section>
 </div>
 <script src="vendor/three.min.js"></script>

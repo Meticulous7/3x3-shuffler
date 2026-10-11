@@ -1,0 +1,8 @@
+# Repo files that should not be published as part of the website.
+.git
+.github
+.gitignore
+README.md
+docker-compose.yml
+nginx
+tools

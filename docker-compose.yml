@@ -14,3 +14,12 @@ services:
       - ./styles.css:/usr/share/nginx/html/styles.css:ro
       - ./app.js:/usr/share/nginx/html/app.js:ro
       - ./vendor:/usr/share/nginx/html/vendor:ro
+      - ./icon.svg:/usr/share/nginx/html/icon.svg:ro
+      - ./favicon-32.png:/usr/share/nginx/html/favicon-32.png:ro
+      - ./apple-touch-icon.png:/usr/share/nginx/html/apple-touch-icon.png:ro
+      - ./icon-192.png:/usr/share/nginx/html/icon-192.png:ro
+      - ./icon-512.png:/usr/share/nginx/html/icon-512.png:ro
+      - ./og-image.png:/usr/share/nginx/html/og-image.png:ro
+      - ./site.webmanifest:/usr/share/nginx/html/site.webmanifest:ro
+      - ./robots.txt:/usr/share/nginx/html/robots.txt:ro
+      - ./sitemap.xml:/usr/share/nginx/html/sitemap.xml:ro
