@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="app-routes" content="path">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="3x3 Shuffler">
 <title>3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube &amp; Timer</title>
@@ -23,13 +24,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="A 3D Rubik's cube mid-turn with a scramble shown move by move">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"3x3 Shuffler","url":"https://3x3shuffler.app/","description":"Rubik's cube scramble generator with a move-by-move 3D guide, a playable virtual 3x3 cube and a speedcubing timer.","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires a browser with WebGL","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"3x3 Shuffler","url":"https://3x3shuffler.app/","description":"Rubik's cube scramble generator with a move-by-move 3D guide, a playable virtual 3x3 cube and a speedcubing timer.","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires a browser with WebGL","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <div class="app">
@@ -317,7 +316,7 @@
     </div>
   </section>
 </div>
-<script src="vendor/three.min.js"></script>
-<script src="app.js"></script>
+<script src="/vendor/three.min.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>

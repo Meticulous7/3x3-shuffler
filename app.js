@@ -990,8 +990,19 @@ function renderTimes(){
 
 /* ================= Mode switching ================= */
 const MODES = ['step', 'play', 'timer'];
+// On the real website each tab has its own address (/, /play, /timer) so search engines can list them separately.
+// The page opts in with <meta name="app-routes">; without it (e.g. the claude.ai artifact) tabs stay on one URL.
+const ROUTES = {step:'/', play:'/play', timer:'/timer'};
+const TITLES = {step:"3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube & Timer",
+                play:"Play a Virtual Rubik's Cube in 3D · 3x3 Shuffler",
+                timer:"Rubik's Cube Timer with Ao5 and Ao12 · 3x3 Shuffler"};
+const pathRouting = !!document.querySelector('meta[name="app-routes"]');
+function modeFromPath(){
+  const p = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/+$/, '') || '/';
+  return MODES.find(k => ROUTES[k] === p) || null;
+}
 let booted = false;
-function setMode(next){
+function setMode(next, push = false){
   if(!MODES.includes(next)) next = 'step';
   if(next === mode && booted) return;
   booted = true;
@@ -1006,12 +1017,17 @@ function setMode(next){
   store.set('scrambleMode', mode);
   resize();
   if(mode === 'step' && thumbsStale && !busy) buildThumbs();
+  if(pathRouting){
+    document.title = TITLES[mode];
+    if(push && location.pathname !== ROUTES[mode]) history.pushState({mode}, '', ROUTES[mode] + location.search);
+  }
 }
+window.addEventListener('popstate', () => { if(pathRouting) setMode(modeFromPath() || 'step'); });
 
 /* ================= Wiring ================= */
-$('tabStep').onclick = () => setMode('step');
-$('tabPlay').onclick = () => setMode('play');
-$('tabTimer').onclick = () => setMode('timer');
+$('tabStep').onclick = () => setMode('step', true);
+$('tabPlay').onclick = () => setMode('play', true);
+$('tabTimer').onclick = () => setMode('timer', true);
 
 $('bStart').onclick = () => goTo(0);
 $('bPrev').onclick = () => goTo(idx - 1);
@@ -1028,7 +1044,7 @@ $('speed').addEventListener('input', speedText);
 speedText();
 $('dim').addEventListener('change', () => highlight(seq[idx]));
 $('autoCam').addEventListener('change', decorate);
-$('bToPlay').onclick = () => { setMode('play'); shuffleWith(seq.slice()); };
+$('bToPlay').onclick = () => { setMode('play', true); shuffleWith(seq.slice()); };
 
 $('bCopy').onclick = () => copyText($('bCopy'), scrambleText(seq), $('seq'));
 $('ownForm').addEventListener('submit', e => {
@@ -1075,7 +1091,7 @@ $('tStart').onclick = e => { e.currentTarget.blur(); T.state === 'running' ? sto
 $('tReset').onclick = e => { e.currentTarget.blur(); resetTimer(); };
 $('tNewScr').onclick = newTimerScramble;
 $('tCopy').onclick = () => copyText($('tCopy'), scrambleText(T.scramble), $('tScramble'));
-$('tToStep').onclick = () => { if(busy) return; loadSequence(T.scramble.slice()); setMode('step'); };
+$('tToStep').onclick = () => { if(busy) return; loadSequence(T.scramble.slice()); setMode('step', true); };
 $('tTimes').addEventListener('click', e => {
   const b = e.target.closest('button.x'); if(!b) return;
   T.times.splice(+b.dataset.i, 1); saveTimes(); renderTimes();
@@ -1164,7 +1180,13 @@ stepCube.setState(seq, 0);
 rememberScramble(seq);
 loadTimes(); newTimerScramble(); renderTimes(); renderSolves();
 const hashMode = location.hash.slice(1);
-setMode(MODES.includes(hashMode) ? hashMode : (MODES.includes(store.get('scrambleMode')) ? store.get('scrambleMode') : 'step'));
+let startMode;
+if(MODES.includes(hashMode)) startMode = hashMode;
+else if(pathRouting) startMode = modeFromPath() || 'step';
+else startMode = MODES.includes(store.get('scrambleMode')) ? store.get('scrambleMode') : 'step';
+setMode(startMode);
+// Old #play / #timer links move to their real addresses.
+if(pathRouting && MODES.includes(hashMode)) history.replaceState({mode:startMode}, '', ROUTES[startMode] + location.search);
 buildThumbs();
 updatePlayUI();
 requestAnimationFrame(frame);

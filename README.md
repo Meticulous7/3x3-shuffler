@@ -13,7 +13,7 @@ Times, solves, recent scrambles and settings are stored in the browser's localSt
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | Page markup, plus the search and share metadata (description, Open Graph tags, structured data) |
+| `index.html`, `play.html`, `timer.html` | The same app at `/`, `/play` and `/timer`, each with its own title, description and starting tab for search results |
 | `styles.css`, `app.js` | All styles and all app code |
 | `vendor/three.min.js` | three.js r147, served locally (no CDN) |
 | `icon.svg`, `*.png`, `site.webmanifest` | Favicon, home-screen icons and the link preview image |
@@ -32,11 +32,11 @@ python3 -m http.server 8088
 
 ## Links
 
-`?scramble=R+U2+F'` opens that scramble in Step through. `#play` and `#timer` open those tabs.
+`/play` and `/timer` open those tabs directly, and switching tabs updates the address. `?scramble=R+U2+F'` opens that scramble in Step through. Old `#play` and `#timer` links still work.
 
 ## Security notes
 
-- No inline script or style, so the policy only allows scripts from the site itself (`script-src 'self'`). The structured-data block in `index.html` is JSON, which browsers don't run.
+- No inline script or style, so the policy only allows scripts from the site itself (`script-src 'self'`). The structured-data block in each page is JSON, which browsers don't run.
 - Everything users type or paste is checked against the 18 face turns before it is used, and is always shown as plain text.
 - `frame-ancestors 'none'` stops other sites from framing the page.
 - Only Google Fonts is loaded from elsewhere. Without it the page falls back to system fonts.
