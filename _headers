@@ -8,3 +8,8 @@
 
 /vendor/*
   Cache-Control: public, max-age=2592000
+
+# Keep the Worker's *.workers.dev addresses (including preview versions) out of search results;
+# only https://3x3shuffler.app should be indexed.
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
