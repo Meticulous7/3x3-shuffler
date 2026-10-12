@@ -546,7 +546,7 @@ async function finishTurnDrag(){
   if(m) afterPlayerMove(m);
 }
 
-/* ================= Step-through mode ================= */
+/* ================= Shuffle mode (step through a scramble) ================= */
 let seq = generate(20), idx = 0, busy = false, playing = false, playId = 0;
 let speed = reduceMotion ? 0 : 400;
 if(reduceMotion) $('speed').value = 0;
@@ -992,13 +992,16 @@ function renderTimes(){
 const MODES = ['step', 'play', 'timer'];
 // On the real website each tab has its own address (/, /play, /timer) so search engines can list them separately.
 // The page opts in with <meta name="app-routes">; without it (e.g. the claude.ai artifact) tabs stay on one URL.
-const ROUTES = {step:'/', play:'/play', timer:'/timer'};
-const TITLES = {step:"3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube & Timer",
-                play:"Play a Virtual Rubik's Cube in 3D · 3x3 Shuffler",
-                timer:"Rubik's Cube Timer with Ao5 and Ao12 · 3x3 Shuffler"};
+const ROUTES = {step:'/shuffle', play:'/play', timer:'/timer'};
+const PATH_TITLES = {'/':"3x3 Shuffler · Rubik's Cube Scrambler, 3D Cube & Timer",
+                     '/shuffle':"Rubik's Cube Scramble Generator, Step by Step in 3D · 3x3 Shuffler",
+                     '/play':"Play a Virtual Rubik's Cube in 3D · 3x3 Shuffler",
+                     '/timer':"Rubik's Cube Timer with Ao5 and Ao12 · 3x3 Shuffler"};
 const pathRouting = !!document.querySelector('meta[name="app-routes"]');
+const currentPath = () => location.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/+$/, '') || '/';
 function modeFromPath(){
-  const p = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/\/+$/, '') || '/';
+  const p = currentPath();
+  if(p === '/') return 'step';                       // the homepage opens on Shuffle
   return MODES.find(k => ROUTES[k] === p) || null;
 }
 let booted = false;
@@ -1017,12 +1020,16 @@ function setMode(next, push = false){
   store.set('scrambleMode', mode);
   resize();
   if(mode === 'step' && thumbsStale && !busy) buildThumbs();
-  if(pathRouting){
-    document.title = TITLES[mode];
-    if(push && location.pathname !== ROUTES[mode]) history.pushState({mode}, '', ROUTES[mode] + location.search);
+  if(pathRouting && push && currentPath() !== ROUTES[mode]){
+    history.pushState({mode}, '', ROUTES[mode] + location.search);
+    document.title = PATH_TITLES[ROUTES[mode]];
   }
 }
-window.addEventListener('popstate', () => { if(pathRouting) setMode(modeFromPath() || 'step'); });
+window.addEventListener('popstate', () => {
+  if(!pathRouting) return;
+  setMode(modeFromPath() || 'step');
+  document.title = PATH_TITLES[currentPath()] || document.title;
+});
 
 /* ================= Wiring ================= */
 $('tabStep').onclick = () => setMode('step', true);

@@ -45,14 +45,14 @@
       <p class="hold" id="hold">Hold your cube with <b>yellow</b> on top, <b>orange</b> facing you and <b>blue</b> on the right.</p>
     </div>
     <nav class="tabs" role="tablist" aria-label="Mode">
-      <button role="tab" id="tabStep" aria-selected="false" aria-controls="stepCol">Step through</button>
+      <button role="tab" id="tabStep" aria-selected="false" aria-controls="stepCol">Shuffle</button>
       <button role="tab" id="tabPlay" aria-selected="true" aria-controls="playCol">Play</button>
       <button role="tab" id="tabTimer" aria-selected="false" aria-controls="timerCol">Timer</button>
     </nav>
   </header>
 
   <div class="main">
-    <!-- ===== Step-through viewer ===== -->
+    <!-- ===== Shuffle (step-by-step scramble) viewer ===== -->
     <section class="stage-col" id="stepCol" data-mode="step" hidden>
       <div class="stage" id="stepStage">
         <div class="readout">
@@ -138,7 +138,7 @@
     </section>
 
     <aside class="panel">
-      <!-- Step-through blocks -->
+      <!-- Shuffle blocks -->
       <div class="block" data-mode="step" hidden>
         <p class="label">This move</p>
         <div class="face-row">
@@ -189,7 +189,7 @@
         <p class="play-scr" id="pScramble"><span class="muted">None yet. Press Shuffle to mix the cube up.</span></p>
         <div class="row">
           <button class="sbtn" id="pCopy">Copy</button>
-          <button class="sbtn" id="pLoadStep">Use the Step-through scramble</button>
+          <button class="sbtn" id="pLoadStep">Use the scramble from Shuffle</button>
         </div>
         <form class="own" id="pOwnForm">
           <input id="pOwnInput" type="text" maxlength="600" placeholder="Paste a scramble to shuffle to" autocomplete="off" spellcheck="false" aria-label="Scramble to shuffle the cube to">
@@ -223,7 +223,7 @@
         <div class="row">
           <button class="sbtn fill" id="tNewScr">New scramble</button>
           <button class="sbtn" id="tCopy">Copy</button>
-          <button class="sbtn" id="tToStep">Step through it</button>
+          <button class="sbtn" id="tToStep">Open in Shuffle</button>
         </div>
       </div>
       <div class="block" data-mode="timer" hidden>
@@ -284,7 +284,7 @@
     <p class="lede">A free tool for the 3x3 Rubik's cube. Generate a random scramble and follow it one turn at a time on a 3D cube, practice solving a virtual cube in your browser, or time your real solves.</p>
     <div class="about-grid">
       <section>
-        <h3>Step through a scramble</h3>
+        <h3>Shuffle</h3>
         <p>Each move gets an arrow on the 3D cube and a card showing the cube before that turn, so you can check your own cube after every move. Paste any scramble in standard notation, like R U' F2, to review it.</p>
       </section>
       <section>

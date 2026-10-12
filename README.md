@@ -2,7 +2,7 @@
 
 Live at **https://3x3shuffler.app**. A Rubik's cube (3x3) site built on three.js r147. Static files only, no backend.
 
-- **Step through:** shows a scramble move by move on a 3D cube, with an arrow for each turn and a grid of step cards. Paste any scramble (numbering, commas and curly quotes are ignored) or reopen one from the recent list.
+- **Shuffle:** shows a scramble move by move on a 3D cube, with an arrow for each turn and a grid of step cards. Paste any scramble (numbering, commas and curly quotes are ignored) or reopen one from the recent list.
 - **Play:** shuffle (randomly or to a pasted scramble), then solve by dragging layers or with the keys U D L R F B M E S (Shift for counter-clockwise). Includes undo, a move count, a timer that starts on your first turn, and a list of recent solves.
 - **Timer:** a timer for solving a real cube. Hold Space (or press and hold on a phone) until the display turns green, let go to start, and press any key or tap to stop. Shows best, Ao5, Ao12 and mean, plus your times.
 - **Cube look:** UV-coated or matte finish, stickerless or black with stickers, and two ways of holding the cube.
@@ -13,7 +13,7 @@ Times, solves, recent scrambles and settings are stored in the browser's localSt
 
 | Path | What it is |
 | --- | --- |
-| `index.html`, `play.html`, `timer.html` | The same app at `/`, `/play` and `/timer`, each with its own title, description and starting tab for search results |
+| `index.html`, `shuffle.html`, `play.html`, `timer.html` | The same app at `/`, `/shuffle`, `/play` and `/timer`, each with its own title, description and starting tab for search results. The homepage opens on Shuffle. |
 | `styles.css`, `app.js` | All styles and all app code |
 | `vendor/three.min.js` | three.js r147, served locally (no CDN) |
 | `icon.svg`, `*.png`, `site.webmanifest` | Favicon, home-screen icons and the link preview image |
@@ -32,7 +32,7 @@ python3 -m http.server 8088
 
 ## Links
 
-`/play` and `/timer` open those tabs directly, and switching tabs updates the address. `?scramble=R+U2+F'` opens that scramble in Step through. Old `#play` and `#timer` links still work.
+`/shuffle`, `/play` and `/timer` open those tabs directly, and switching tabs updates the address. `?scramble=R+U2+F'` opens that scramble in Shuffle. Old `#play` and `#timer` links still work.
 
 ## Security notes
 
